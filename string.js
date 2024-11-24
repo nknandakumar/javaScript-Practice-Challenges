@@ -15,7 +15,7 @@ const handleReverse = (...args) => {
 handleReverse(...word);
 
 //Improved Code
- 
+
 const reverse = (...args) => {
 	let reversedWord = "";
 	for (let i = args.length - 1; i >= 0; i--) {
@@ -27,3 +27,26 @@ const reverse = (...args) => {
 const reversedString = reverse(...word);
 console.log(`String without Reverse :- ${word}`);
 console.log(`String with Reverse :- ${reversedString}`);
+
+
+console.log("----------------------------- Palindrome -------------------------------");
+
+
+const palindromeWord = "levele";
+
+const handlePalindrome =(str)=>{
+	let left = 0 ;
+	let right = str.length-1 ;
+
+	while (left < right) {
+		  if(str[left] !== str[right]){
+			 return false ;
+		  }
+		  left++ ;
+		  right--;
+	}
+	return true
+}
+
+console.log( handlePalindrome(palindromeWord));
+
