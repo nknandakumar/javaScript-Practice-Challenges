@@ -1,64 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stop Watch</title>
-    <style>
-        body{
-            margin: 0;
-            padding: 0;
-            background-color: hotpink;
-        }
-        main{
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        
-        .timer_box{
-            background-color:gold;
-            padding: 20px;
-            border-radius: 2.5mm;
-            border:black solid;
-            display: flex;
-            flex-direction: column;
-           align-items: center;
-            justify-items: center;
-            
-        }
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Stop Watch</title>
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				background-color: hotpink;
+			}
+			main {
+				display: flex;
+				justify-content: center;
+				align-content: center;
+				align-items: center;
+				height: 100vh;
+			}
 
-        .display{
-            font-weight:bolder;
-            font-size: 28px ;
-            padding: 10px 5px ;
-        }
+			.timer_box {
+				background-color: gold;
+				padding: 20px;
+				border-radius: 2.5mm;
+				border: black solid;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-items: center;
+			}
 
-        button{
-            font-size: 20px;
-            font-weight: 900;
-            border-radius: 2.5mm;
-        }
-        
-        
+			.display {
+				font-weight: bolder;
+				font-size: 28px;
+				padding: 10px 5px;
+			}
 
-    </style>
-</head>
-<body>
-    <main>
-         <div class="timer_box">
-             <div class="display" id="display">
-                00:00:00
-             </div>
-             <div class="btns_box">
-                <button class=" btn ">START</button>
-                <button class=" btn ">STOP</button>
-                <button class=" btn ">RESET</button>
-             </div>
-         </div>
-        
-    </main>
-</body>
+			button {
+				font-size: 20px;
+				font-weight: 900;
+				border-radius: 2.5mm;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<div class="timer_box">
+				<div class="display" id="display">00:00:00</div>
+				<div class="btns_box">
+					<button class="btn" onclick="start()">START</button>
+					<button class="btn" onclick="stop()">STOP</button>
+					<button class="btn" onclick="resetTime()">RESET</button>
+				</div>
+			</div>
+			<script>
+				let seconds = 0;
+				let minute = 0;
+				let hour = 0;
+				let display = document.getElementById("display");
+				let time = null;
+				const handleTime = () => {
+					seconds++;
+					if (seconds === 60) {
+						seconds = 0;
+						minute++;
+						if (minute == 60) {
+							minute = 0;
+							hour++;
+						}
+					}
+					display.innerHTML = `${hour.toString().padStart(2, "0")}:${minute
+						.toString()
+						.padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+				};
+
+				const start = () => {
+					if (time !== null) {
+						clearInterval(time);
+					}
+					time = setInterval(handleTime, 1000);
+				};
+
+				const stop = () => {
+					clearInterval(time);
+				};
+
+				const resetTime = () => {
+					seconds = 0;
+					minute = 0;
+					hour = 0;
+
+					display.innerHTML = `00:00:00`;
+				};
+			</script>
+		</main>
+	</body>
 </html>
